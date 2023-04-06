@@ -14,12 +14,28 @@ import 'package:locale_plus/locale_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ColendiWebView extends StatefulWidget {
+  /// A Uri object representing the URL to load in the web view.
   final Uri url;
+
+  /// A callback function that is called when
+  /// a message is received from the web view.
   final void Function(String message)? messageCallback;
+
+  /// A Color object representing the background
+  /// color of the web view. The default value is Colors.white.
   final Color backgroundColor;
+
+  /// A bool value indicating whether
+  /// the web view should be displayed in full screen mode.
+  /// The default value is false. When set to true,
+  /// the web page can adjust its layout accordingly.
   final bool isFullScreen;
+
+  /// A function that is called when a permission request is made in
+  /// the Android version of the web view.
+  /// It takes two arguments: the origin of the request, and a list of resources
+  /// that are being requested.
   final Future<PermissionRequestResponse?> Function(
-    InAppWebViewController controller,
     String origin,
     List<String> resources,
   )? androidOnPermissionRequest;
@@ -221,7 +237,12 @@ class _ColendiWebViewState extends State<ColendiWebView> {
             allowsInlineMediaPlayback: true,
           ),
         ),
-        androidOnPermissionRequest: widget.androidOnPermissionRequest,
+        androidOnPermissionRequest: (controller, origin, resources) async {
+          return widget.androidOnPermissionRequest?.call(
+            origin,
+            resources,
+          );
+        },
         onWebViewCreated: _onWebViewCreated,
       ),
     );
