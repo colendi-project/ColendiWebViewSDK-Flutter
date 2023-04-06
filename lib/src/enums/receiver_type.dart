@@ -1,0 +1,4 @@
+enum ReceiverType {
+  sdk,
+  web,
+}
