@@ -176,7 +176,7 @@ class _ColendiWebViewState extends State<ColendiWebView> {
           }
           break;
         case PostMessageType.copyToClipboard:
-          Clipboard.setData(ClipboardData(text: postMessage.message));
+          Clipboard.setData(ClipboardData(text: postMessage.message ?? ''));
           break;
         default:
       }
