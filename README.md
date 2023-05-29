@@ -33,7 +33,7 @@ This will add a line like this to your package's pubspec.yaml (and run an implic
 
 ```
 dependencies:
-  colendi_web_view_sdk_flutter: ^1.1.0
+  colendi_web_view_sdk_flutter: ^1.1.1
 ```
 
 # Integration
