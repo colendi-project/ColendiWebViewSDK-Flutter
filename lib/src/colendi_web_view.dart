@@ -5,6 +5,8 @@ import 'package:colendi_web_view_sdk_flutter/src/enums/sdk_query_parameters.dart
 import 'package:colendi_web_view_sdk_flutter/src/models/colendi_sdk_error.dart';
 import 'package:colendi_web_view_sdk_flutter/src/models/post_message.dart';
 import 'package:colendi_web_view_sdk_flutter/src/utils/enum_factory.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -55,6 +57,13 @@ class ColendiWebView extends StatefulWidget {
 
 class _ColendiWebViewState extends State<ColendiWebView> {
   InAppWebViewController? _webViewController;
+
+  Set<Factory<OneSequenceGestureRecognizer>> get _gestureRecognizer =>
+      <Factory<OneSequenceGestureRecognizer>>{}
+        ..add(Factory<VerticalDragGestureRecognizer>(
+            () => VerticalDragGestureRecognizer()))
+        ..add(Factory<HorizontalDragGestureRecognizer>(
+            () => HorizontalDragGestureRecognizer()));
 
   Future<URLRequest> _setQueryParameters(Uri url) async {
     Uri uri = widget.url;
@@ -244,6 +253,7 @@ class _ColendiWebViewState extends State<ColendiWebView> {
           );
         },
         onWebViewCreated: _onWebViewCreated,
+        gestureRecognizers: _gestureRecognizer,
       ),
     );
   }
