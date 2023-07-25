@@ -6,4 +6,5 @@ enum PostMessageType {
   vibrate,
   error,
   copyToClipboard,
+  custom,
 }

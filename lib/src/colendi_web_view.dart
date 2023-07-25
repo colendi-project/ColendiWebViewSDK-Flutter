@@ -1,3 +1,4 @@
+import 'package:colendi_web_view_sdk_flutter/src/colendi_communication_service.dart';
 import 'package:colendi_web_view_sdk_flutter/src/constants/constants.dart';
 import 'package:colendi_web_view_sdk_flutter/src/enums/post_message_type.dart';
 import 'package:colendi_web_view_sdk_flutter/src/enums/receiver_type.dart';
@@ -42,12 +43,18 @@ class ColendiWebView extends StatefulWidget {
     List<String> resources,
   )? androidOnPermissionRequest;
 
+  /// A function that is called when the web view is created.
+  /// ColendiCommunicationService instance can be used to
+  /// send messages to the ColendiWebView.
+  final void Function(ColendiCommunicationService service)? onServiceCreated;
+
   const ColendiWebView({
     required this.url,
     this.messageCallback,
     this.androidOnPermissionRequest,
     this.backgroundColor = Colors.white,
     this.isFullScreen = false,
+    this.onServiceCreated,
     Key? key,
   }) : super(key: key);
 
@@ -55,7 +62,8 @@ class ColendiWebView extends StatefulWidget {
   State<ColendiWebView> createState() => _ColendiWebViewState();
 }
 
-class _ColendiWebViewState extends State<ColendiWebView> {
+class _ColendiWebViewState extends State<ColendiWebView>
+    implements ColendiCommunicationService {
   InAppWebViewController? _webViewController;
 
   Set<Factory<OneSequenceGestureRecognizer>> get _gestureRecognizer =>
@@ -226,6 +234,8 @@ class _ColendiWebViewState extends State<ColendiWebView> {
         }
       },
     );
+
+    widget.onServiceCreated?.call(this);
   }
 
   @override
@@ -254,6 +264,16 @@ class _ColendiWebViewState extends State<ColendiWebView> {
         },
         onWebViewCreated: _onWebViewCreated,
         gestureRecognizers: _gestureRecognizer,
+      ),
+    );
+  }
+
+  @override
+  void sendMessage(String message) {
+    _sendPostMessage(
+      PostMessage(
+        type: PostMessageType.custom,
+        message: message,
       ),
     );
   }

@@ -22,6 +22,11 @@ class MyApp extends StatelessWidget {
         messageCallback: (message) {
           debugPrint(message);
         },
+
+        /// Send message to ColendiWebView
+        onServiceCreated: (instance) {
+          instance.sendMessage('message to ColendiWebView');
+        },
       ),
     );
   }

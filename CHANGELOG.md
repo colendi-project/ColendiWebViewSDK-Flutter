@@ -1,3 +1,7 @@
+## 1.2.0
+
+* ColendiCommunicationService implemented for sending custom messages to ColendiWebView
+
 ## 1.1.2
 
 * Gesture recognizers added.
