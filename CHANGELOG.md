@@ -1,3 +1,7 @@
+## 1.2.1
+
+* Minor improvements for messages.
+
 ## 1.2.0
 
 * ColendiCommunicationService implemented for sending custom messages to ColendiWebView

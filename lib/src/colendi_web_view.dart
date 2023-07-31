@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:colendi_web_view_sdk_flutter/src/colendi_communication_service.dart';
 import 'package:colendi_web_view_sdk_flutter/src/constants/constants.dart';
 import 'package:colendi_web_view_sdk_flutter/src/enums/post_message_type.dart';
@@ -222,10 +224,19 @@ class _ColendiWebViewState extends State<ColendiWebView>
       handlerName: Constants.jsListenerName,
       callback: (eventData) {
         try {
-          final map = eventData[0] as Map<String, dynamic>;
-          final message = PostMessage.fromJson(map);
-          if (message.receiverType == ReceiverType.sdk) {
-            _messageHandler(message);
+          final data = eventData[0];
+
+          PostMessage postMessage;
+
+          if (data is String) {
+            final map = jsonDecode(data);
+            postMessage = PostMessage.fromJson(map);
+          } else {
+            postMessage = PostMessage.fromJson(data);
+          }
+
+          if (postMessage.receiverType == ReceiverType.sdk) {
+            _messageHandler(postMessage);
           } else {
             return;
           }
