@@ -50,6 +50,15 @@ class ColendiWebView extends StatefulWidget {
   /// send messages to the ColendiWebView.
   final void Function(ColendiCommunicationService service)? onServiceCreated;
 
+  ///Sets whether WebView should use browser caching.
+  ///The default value is `false`.
+  final bool cacheEnabled;
+
+  ///Set to `false` to do not have all the browser's cache
+  ///cleared before the new ColendiWebView is opened.
+  ///The default value is `true`.
+  final bool clearCache;
+
   const ColendiWebView({
     required this.url,
     this.messageCallback,
@@ -57,6 +66,8 @@ class ColendiWebView extends StatefulWidget {
     this.backgroundColor = Colors.white,
     this.isFullScreen = false,
     this.onServiceCreated,
+    this.cacheEnabled = false,
+    this.clearCache = true,
     Key? key,
   }) : super(key: key);
 
@@ -260,6 +271,8 @@ class _ColendiWebViewState extends State<ColendiWebView>
             mediaPlaybackRequiresUserGesture: false,
             // javaScriptEnabled: true,
             transparentBackground: true,
+            cacheEnabled: widget.cacheEnabled,
+            clearCache: widget.clearCache,
           ),
           android: AndroidInAppWebViewOptions(
             useHybridComposition: true,

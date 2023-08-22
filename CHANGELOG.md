@@ -1,7 +1,12 @@
+## 1.2.3
+
+* Expose `cacheEnabled` parameter for use.
+* Expose `clearCache` parameter for use.
+
 ## 1.2.2
 
 * IOS swipe back navigation bug fix.
-* Dark theme background colir fix.
+* Dark theme background color fix.
 
 ## 1.2.1
 
