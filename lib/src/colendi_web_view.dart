@@ -259,12 +259,14 @@ class _ColendiWebViewState extends State<ColendiWebView>
           crossPlatform: InAppWebViewOptions(
             mediaPlaybackRequiresUserGesture: false,
             // javaScriptEnabled: true,
+            transparentBackground: true,
           ),
           android: AndroidInAppWebViewOptions(
             useHybridComposition: true,
           ),
           ios: IOSInAppWebViewOptions(
             allowsInlineMediaPlayback: true,
+            allowsBackForwardNavigationGestures: false,
           ),
         ),
         androidOnPermissionRequest: (controller, origin, resources) async {

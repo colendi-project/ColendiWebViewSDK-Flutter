@@ -1,3 +1,8 @@
+## 1.2.2
+
+* IOS swipe back navigation bug fix.
+* Dark theme background colir fix.
+
 ## 1.2.1
 
 * Minor improvements for messages.
