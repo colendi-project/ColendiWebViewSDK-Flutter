@@ -18,6 +18,10 @@ import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:locale_plus/locale_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'models/native_image_data.dart';
+import 'utils/image_service.dart';
+import 'dart:convert';
+
 class ColendiWebView extends StatefulWidget {
   /// A Uri object representing the URL to load in the web view.
   final Uri url;
@@ -208,13 +212,50 @@ class _ColendiWebViewState extends State<ColendiWebView>
         case PostMessageType.copyToClipboard:
           Clipboard.setData(ClipboardData(text: postMessage.message ?? ''));
           break;
+        case PostMessageType.getImage:
+          _getImage(postMessage);
+          break;
         default:
       }
     } catch (e) {
-      final errorMessage =
-          PostMessage(type: PostMessageType.error, message: '$e');
+      final errorMessage = PostMessage(
+        type: PostMessageType.error,
+        message: '$e',
+      );
+
       _sendPostMessage(errorMessage);
     }
+  }
+
+  Future<void> _getImage(PostMessage postMessage) async {
+    final imageUrl = postMessage.message;
+
+    if (imageUrl == null) {
+      throw ColendiSdkError.messageIsNull.name;
+    }
+
+    final imageBytes = await getImage(imageUrl);
+
+    if (imageBytes == null) {
+      throw ColendiSdkError.invalidUrl.name;
+    }
+
+    final imageData = NativeImageData(
+      imageUrl: imageUrl,
+      imageBytes: imageBytes,
+    );
+
+    final message = PostMessage(
+      type: PostMessageType.getImage,
+      message: imageData.toEncodedString(),
+    );
+
+    final js = Constants.jsSendMessage.replaceAll(
+      Constants.jsonMessagePlaceholder,
+      jsonEncode(message.toJson()),
+    );
+
+    _webViewController?.evaluateJavascript(source: js);
   }
 
   Future<void> _onWebViewCreated(InAppWebViewController controller) async {
