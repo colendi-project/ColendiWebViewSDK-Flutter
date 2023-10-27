@@ -20,7 +20,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'models/native_image_data.dart';
 import 'utils/image_service.dart';
-import 'dart:convert';
 
 class ColendiWebView extends StatefulWidget {
   /// A Uri object representing the URL to load in the web view.

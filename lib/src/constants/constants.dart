@@ -1,5 +1,5 @@
 mixin Constants {
-  static const sdkVersion = '1.0.0';
+  static const sdkVersion = '1.3.0';
 
   static const jsMessageListener = '''
               window.addEventListener("message", function(event) {
