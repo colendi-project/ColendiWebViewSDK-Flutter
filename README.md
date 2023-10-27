@@ -33,7 +33,7 @@ This will add a line like this to your package's pubspec.yaml (and run an implic
 
 ```
 dependencies:
-  colendi_web_view_sdk_flutter: ^1.2.3
+  colendi_web_view_sdk_flutter: ^1.3.0
 ```
 
 # Integration
@@ -70,7 +70,7 @@ class MyWidget extends StatelessWidget {
 
 # Author
 
-[Gökberk Bardakçı](https://www.github.com/gokberkbar), [Uygar İşiçelik](https://www.github.com/uygar) from [Colendi](https://www.twitter.com/colendiapp)
+[Colendi](https://www.twitter.com/colendiapp)
 
 # License
 
