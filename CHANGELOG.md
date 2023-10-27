@@ -1,3 +1,7 @@
+## 1.3.0
+ 
+* Getting image from network support added.
+
 ## 1.2.3
 
 * Expose `cacheEnabled` parameter for use.
