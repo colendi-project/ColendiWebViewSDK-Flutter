@@ -1,3 +1,11 @@
+## 1.4.0
+
+* fix: xcode 15 related bug
+
+    ### BREAKING CHANGES
+
+    * Flutter minimum version 3.10.0
+
 ## 1.3.0
  
 * Getting image from network support added.
