@@ -16,8 +16,8 @@ The Colendi Web View is a Software Development Kit developed by Colendians to en
 
 # Requirements
 
-- Dart sdk: ">=3.0.0 <4.0.0"
-- Flutter: ">=3.10.0"
+- Dart: ">=3.1.0 <4.0.0"
+- Flutter: ">=3.13.0"
 - Android: minSdkVersion 19
 - iOS 11.0+
 
@@ -33,7 +33,7 @@ This will add a line like this to your package's pubspec.yaml (and run an implic
 
 ```
 dependencies:
-  colendi_web_view_sdk_flutter: ^1.4.0
+  colendi_web_view_sdk_flutter: ^1.5.0
 ```
 
 # Integration

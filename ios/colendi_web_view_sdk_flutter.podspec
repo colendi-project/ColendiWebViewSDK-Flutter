@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'colendi_web_view_sdk_flutter'
-  s.version          = '1.4.0'
+  s.version          = '1.5.0'
   s.summary          = 'The Colendi Web View Software Development Kit.'
   s.description      = <<-DESC
   The Colendi Web View is a Software Development Kit developed by Colendians to enable fast and simple integration to Colendi World.

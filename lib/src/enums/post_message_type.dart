@@ -8,4 +8,5 @@ enum PostMessageType {
   copyToClipboard,
   getImage,
   custom,
+  didChangeAppLifecycleState,
 }

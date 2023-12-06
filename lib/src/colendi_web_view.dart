@@ -5,6 +5,7 @@ import 'package:colendi_web_view_sdk_flutter/src/constants/constants.dart';
 import 'package:colendi_web_view_sdk_flutter/src/enums/post_message_type.dart';
 import 'package:colendi_web_view_sdk_flutter/src/enums/receiver_type.dart';
 import 'package:colendi_web_view_sdk_flutter/src/enums/sdk_query_parameters.dart';
+import 'package:colendi_web_view_sdk_flutter/src/extensions/uri_extension.dart';
 import 'package:colendi_web_view_sdk_flutter/src/models/colendi_sdk_error.dart';
 import 'package:colendi_web_view_sdk_flutter/src/models/post_message.dart';
 import 'package:colendi_web_view_sdk_flutter/src/utils/enum_factory.dart';
@@ -13,7 +14,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:colendi_web_view_sdk_flutter/src/extensions/uri_extension.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:locale_plus/locale_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -79,8 +79,25 @@ class ColendiWebView extends StatefulWidget {
 }
 
 class _ColendiWebViewState extends State<ColendiWebView>
+    with WidgetsBindingObserver
     implements ColendiCommunicationService {
   InAppWebViewController? _webViewController;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    _sendPostMessage(
+      PostMessage(
+        type: PostMessageType.didChangeAppLifecycleState,
+        message: state.name,
+      ),
+    );
+  }
 
   Set<Factory<OneSequenceGestureRecognizer>> get _gestureRecognizer =>
       <Factory<OneSequenceGestureRecognizer>>{}
@@ -342,5 +359,11 @@ class _ColendiWebViewState extends State<ColendiWebView>
         message: message,
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.addObserver(this);
+    super.dispose();
   }
 }

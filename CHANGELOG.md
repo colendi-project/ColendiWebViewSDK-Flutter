@@ -1,3 +1,11 @@
+## 1.5.0
+
+* AppLifeCycleState listener handled
+
+    ### BREAKING CHANGES
+
+    * Flutter minimum version 3.13.0
+
 ## 1.4.0
 
 * fix: xcode 15 related bug

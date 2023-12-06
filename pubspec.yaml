@@ -1,6 +1,6 @@
 name: colendi_web_view_sdk_flutter
 description: The Colendi Web View is a Software Development Kit developed by Colendians to enable fast and simple integration to Colendi World.
-version: 1.4.0
+version: 1.5.0
 homepage: https://github.com/colendi-project/ColendiWebViewSDK-Flutter
 
 environment:
